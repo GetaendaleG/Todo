@@ -5,6 +5,7 @@ function Header(){
         <header>
             <img src={logo} alt="todo-logo" />
             <h1>Todo App</h1>
+            <hr />
         </header>
     )
 }

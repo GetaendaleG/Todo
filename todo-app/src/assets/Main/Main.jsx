@@ -1,24 +1,37 @@
 import { useState } from "react";
-
+import './Main.css'
     
 
 function Main(){
     const [list,setList] = useState([]);
     const [input,setInput] = useState('');
     function addTask(){
-        setList([...list, input]);
-        setInput('');
+        if(input!=""){
+            setList([...list,input])
+            setInput("");
+        }
+        
+    }
+    function handlKey(event){
+        if(event.key==='Enter'){
+            addTask();
+        }
     }
     function handleInput(event){
         setInput(event.target.value);
     }
+    function handleReset(){
+        setList([]);
+        setInput('');
+    }
     return(
         <>
-            <input onChange={handleInput} type="text" />
-            <button onClick={addTask}>Add</button>
+            <input onKeyDown={handlKey} value={input} onChange={handleInput} type="text" />
+            <button  onClick={addTask}>Add</button>
+            <button onClick={handleReset} >Reset</button>
             <ol>
                 {
-                    list.map((todo)=><li>{todo}</li>)
+                    list.map((todo,index)=><li key={index}>{todo}</li>)
                 }
             </ol>
         </>
